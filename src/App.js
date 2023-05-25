@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import WebcamCapture from "./components/WebcamCapture/WebcamCapture";
+import { useRef, useState } from "react";
 
 function App() {
+  const webcamRef = useRef(null);
+  const [image, setImage] = useState("");
+
+  const capture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+
+    setImage(imageSrc);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <WebcamCapture capture={capture} webcamRef={webcamRef} />
+
+      {image && <img src={image} alt="from webcam" />}
+    </>
   );
 }
 
