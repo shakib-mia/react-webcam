@@ -13,14 +13,21 @@ const WebcamCapture = ({ capture, webcamRef }) => {
   return (
     <Webcam
       audio={false}
-      //   height={720}
-      className="w-1/2 mx-auto"
+      className="w-1/2 mx-auto rounded-xl"
       screenshotFormat="image/jpeg"
-      //   width={1280}
       ref={webcamRef}
       videoConstraints={videoConstraints}
     >
-      {() => <button onClick={capture}>Capture photo</button>}
+      {() => (
+        <div className="text-center">
+          <button
+            className="bg-green-700 text-white px-6 py-2 mt-5 rounded"
+            onClick={capture}
+          >
+            Capture photo
+          </button>
+        </div>
+      )}
     </Webcam>
   );
 };

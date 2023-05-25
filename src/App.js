@@ -1,23 +1,25 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import WebcamCapture from "./components/WebcamCapture/WebcamCapture";
-import { useRef, useState } from "react";
+import CaptureSection from "./components/CaptureSection/CaptureSection";
+import Home from "./components/Home/Home";
 
 function App() {
-  const webcamRef = useRef(null);
-  const [image, setImage] = useState("");
-
-  const capture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-
-    setImage(imageSrc);
-  };
-
+  const routes = [
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/capture",
+      element: <CaptureSection />,
+    },
+  ];
   return (
-    <>
-      <WebcamCapture capture={capture} webcamRef={webcamRef} />
-
-      {image && <img src={image} alt="from webcam" />}
-    </>
+    <Routes>
+      {routes.map(({ path, element }) => (
+        <Route path={path} element={element} />
+      ))}
+    </Routes>
   );
 }
 
